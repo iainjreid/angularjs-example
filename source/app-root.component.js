@@ -18,10 +18,16 @@ class AppRootComponent {
 }
 
 angular
-  .module('app', ['ngComponentRouter'])
+  .module('app', ['ngComponentRouter', 'ngMaterial'])
+  .config(['$mdThemingProvider', ($mdThemingProvider) => {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('orange')
+      .accentPalette('yellow')
+      .dark()
+  }])
   .value('$routerRootComponent', 'appRoot')
   .component('appRoot', {
     template: AppRootTpl,
     controller: AppRootComponent,
-    controllerAs: '$appCtrl'
+    controllerAs: '$appRootCtrl'
   })
