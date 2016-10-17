@@ -15,6 +15,7 @@ module.exports = {
   entry: {
     app: [
       './node_modules/angular',
+      './node_modules/angular-material',
       './node_modules/@angular/router/angular1/angular_1_router.js',
       ...glob.sync('./source/**/*.js')
     ]
@@ -41,6 +42,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
       }
     ]
   },
