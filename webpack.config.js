@@ -12,14 +12,13 @@ try {
 }
 
 module.exports = {
-  entry: {
-    app: [
-      './node_modules/angular',
-      './node_modules/angular-material',
-      './node_modules/@angular/router/angular1/angular_1_router.js',
-      ...glob.sync('./source/**/*.js')
-    ]
-  },
+  entry: [
+    './node_modules/angular',
+    './node_modules/angular-material',
+    './node_modules/angular-material/angular-material.css',
+    './node_modules/@angular/router/angular1/angular_1_router.js',
+    ...glob.sync('./source/**/*.js').sort((a, b) => a.length > b.length)
+  ],
   output: {
     path: 'build',
     filename: 'bundle.js'
@@ -46,6 +45,13 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'html-loader'
+      },
+      {
+        test: /\.css$/,
+        loaders: [
+          'style-loader',
+          'css-loader'
+        ]
       }
     ]
   },
