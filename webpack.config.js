@@ -2,6 +2,7 @@
 
 // Dependencies
 const glob = require('glob')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // Hack for Ubuntu on Windows: interface enumeration fails with EINVAL, so return empty.
 try {
@@ -12,13 +13,21 @@ try {
 
 module.exports = {
   entry: {
-    app: glob.sync('./source/**/*.js')
+    app: [
+      './node_modules/angular',
+      './node_modules/@angular/router/angular1/angular_1_router.js',
+      ...glob.sync('./source/**/*.js')
+    ]
   },
   output: {
     path: 'build',
-    publicPath: '/build/',
     filename: 'bundle.js'
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'source/index.html'
+    })
+  ],
   module: {
     preLoaders: [
       {
